@@ -9,5 +9,8 @@ package com.mycompany.jdbc_crud2;
  * @author tatic
  */
 public class inicio {
-    
+    public static void main(String[] args) {
+        FormAlumno objetoFormulario = new FormAlumno();
+        objetoFormulario.setVisible(true);
+    }
 }
