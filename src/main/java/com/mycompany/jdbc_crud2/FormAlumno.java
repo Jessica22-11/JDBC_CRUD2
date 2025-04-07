@@ -201,6 +201,8 @@ public class FormAlumno extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.InsertarAlumnos(txtnombre, txtapellido);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
