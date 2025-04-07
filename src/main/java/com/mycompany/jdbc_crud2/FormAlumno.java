@@ -16,6 +16,9 @@ public class FormAlumno extends javax.swing.JFrame {
     public FormAlumno() {
         initComponents();
         
+        txtid.setEnabled(false);
+        this.setLocationRelativeTo(null);
+        
         CAlumnos objetoAlumnos =new CAlumnos();
         objetoAlumnos.MostrarAlumnos(TablaTotalAlumnos);
         
@@ -78,6 +81,11 @@ public class FormAlumno extends javax.swing.JFrame {
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
 
@@ -150,6 +158,11 @@ public class FormAlumno extends javax.swing.JFrame {
 
             }
         ));
+        TablaTotalAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaTotalAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaTotalAlumnos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -208,6 +221,19 @@ public class FormAlumno extends javax.swing.JFrame {
         objetoAlumnos.InsertarAlumnos(txtnombre, txtapellido);
         objetoAlumnos.MostrarAlumnos(TablaTotalAlumnos);
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void TablaTotalAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaTotalAlumnosMouseClicked
+        // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.SeleccionarAlumnos(TablaTotalAlumnos, txtid, txtnombre, txtapellido);
+    }//GEN-LAST:event_TablaTotalAlumnosMouseClicked
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        CAlumnos objetoAlumnos = new CAlumnos();
+        objetoAlumnos.ModificarAlumnos(txtid, txtnombre, txtapellido);
+        objetoAlumnos.MostrarAlumnos(TablaTotalAlumnos);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
