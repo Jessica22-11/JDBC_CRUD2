@@ -5,8 +5,14 @@
 package com.mycompany.jdbc_crud2;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -61,5 +67,42 @@ public class CAlumnos {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se inserto correctamante el alumno, error: " +e.toString());
         }
+    }
+    
+    public void MostrarAlumnos(JTable paramTablaTotalAlumnos){
+        CConexion objetoConexion = new CConexion();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        TableRowSorter<TableModel> OrdenarTabla = new TableRowSorter<TableModel>(modelo);
+        paramTablaTotalAlumnos.setRowSorter(OrdenarTabla);
+        
+        String sql="select * from alumnos;";
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        
+        String[] datos =new String[3];
+        Statement st;
+        
+        try {
+            st = objetoConexion.establecerConexion().createStatement();
+            ResultSet rs =st.executeQuery(sql);
+            
+            while(rs.next()){
+                datos[0]=rs.getString(1);
+                datos[1]=rs.getString(2);
+                datos[2]=rs.getString(3);
+                
+                modelo.addRow(datos);
+            }
+            
+            paramTablaTotalAlumnos.setModel(modelo);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo mostrar los alumnos, Error: " +e.toString());
+        }
+        
     }
 }
